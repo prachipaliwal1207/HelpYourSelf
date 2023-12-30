@@ -1,0 +1,216 @@
+.home {
+  & .dashboard {
+  }
+  & .welcome {
+    padding: 30px;
+    color: #000;
+    font-size: 32px;
+    & span {
+      display: block;
+      font-size: 16px;
+    }
+  }
+  & .helpMe {
+    text-align: center;
+    padding: 100px 0;
+
+    & .btn {
+      font-size: 42px !important;
+      padding: 8px 56px;
+    }
+  }
+  & .loading {
+    background: url(../../../assets/loader.jpg);
+    height: 300px;
+    width: 100%;
+    background-size: contain;
+    padding-top: 200px;
+    text-align: center;
+  }
+  & .requestData {
+    text-align: center;
+    & h2 {
+      font-size: 24px;
+      text-align: center;
+      color: white;
+      width: auto;
+      display: inline-block;
+      // background: green;
+      padding: 16px 30px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    & h4 {
+      font-size: 16px;
+      text-align: center;
+    }
+    & table {
+      padding: 10px;
+      margin: 0 auto;
+      margin-top: 30px;
+      text-align: initial;
+      & th {
+        width: 50%;
+        padding: 10px;
+        outline: solid thin #aaa;
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+  & .driverCallImg {
+    width: 30px;
+    vertical-align: middle;
+  }
+  & .cancleRequest {
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    font-size: 14px;
+    color: red;
+  }
+  & .driverReached {
+    display: flex;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.callDirect {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  & .makeCall {
+    display: flex;
+    flex-flow: column;
+    row-gap: 12px;
+
+    text-decoration: none;
+    color: #33a867;
+    text-transform: capitalize;
+
+    & img {
+      width: 60px;
+    }
+  }
+}
+.callDirectD{
+  &::after{
+    content: "Contact Family of User";
+    position: absolute;
+    font-size: 12px;
+    top: -32px;
+    border-bottom: solid thin;
+  }
+}
+.logout {
+  display: inline-block;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 14px;
+  color: red;
+}
+
+.requests {
+  & .request {
+    padding: 10px;
+    border: solid #565656;
+    margin: 6px;
+    margin-bottom: 10px;
+    & .details {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    & .distance {
+      text-align: center;
+      & span {
+        display: block;
+        font-size: 12px;
+      }
+    }
+    & .call {
+    }
+    & .map {
+    }
+    & .button {
+      margin-top: 10px;
+    }
+  }
+  & img {
+    width: 56px;
+  }
+}
+
+.liveDriver {
+  padding: 10px;
+  margin: 0 auto;
+  text-align: initial;
+  & table {
+    margin: 0 auto !important;
+    margin-top: 10px !important;
+  }
+  & th {
+    width: 50%;
+    padding: 10px;
+    outline: solid thin #aaa;
+  }
+  & h2.updating {
+    font-size: 16px !important;
+    margin-top: -16px;
+  }
+}
+.errorMsg {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  row-gap: 20px;
+  height: 400px;
+  opacity: 0.6;
+  & img {
+    width: 40%;
+  }
+}
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+.updating {
+  --border-size: 3px;
+  --border-angle: 0turn;
+  background-image: conic-gradient(
+      from var(--border-angle),
+      #832929,
+      #112 50%,
+      #213
+    ),
+    conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03);
+  background-size: calc(100% - (var(--border-size) * 2))
+      calc(100% - (var(--border-size) * 2)),
+    cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-animation: bg-spin 3s linear infinite;
+  animation: bg-spin 3s linear infinite;
+}
+@-webkit-keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}

@@ -1,0 +1,143 @@
+<div class="home" *ngIf="userType == 'user'">
+  <div class="dashboard welcome">
+    <span>Hi,</span>
+    {{name}}
+  </div>
+  <div class="helpMe" *ngIf="!isLive">
+    <button (click)="helpMe()" class="btn btn-danger btn-lg">Help!</button>
+  </div>
+  <div class="logout" (click)="doLogout()">Logout</div>
+  <div class="liveTransaction" *ngIf="isLive">
+    <div *ngIf="liveStatus == 1" class="loading">
+      Searching Nearest Ambulance
+    </div>
+    <div *ngIf="liveStatus == 1 || liveStatus == 2" class="cancleRequest" (click)="updateReuqest(5)">Cancel Request
+    </div>
+    <div *ngIf="liveStatus == 2" class="requestData">
+      <div class="">
+        <h2 class="updating">Ambulance Enrouted</h2>
+        <h4>Ambulance Distance {{ this.requestData.distance.toFixed(2) }} KM</h4>
+        <h4>Ambulance arriving in {{ this.requestData.reachingIn.toFixed(2) }} Minutes</h4>
+        <table>
+          <tr>
+            <th>Driver Name</th>
+            <th>{{ this.requestData.helperData.name }}</th>
+          </tr>
+          <tr>
+            <th>Driver Contact</th>
+            <th>
+              <a href="tel:+91{{ this.requestData.helperData.mobileno }}">
+                <img src="../../../assets/call.webp" class="driverCallImg" />
+                {{ this.requestData.helperData.mobileno }}
+              </a>
+            </th>
+          </tr>
+          <tr>
+            <th>Ambulance No</th>
+            <th>{{ this.requestData.helperData.vehicleNo }}</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="liveStatus == 3" class="driverReached requestData">
+      <h2 class="updating">Ambulance Reached</h2>
+    </div>
+    <div *ngIf="liveStatus == 4" class="driverReached requestData">
+      <h2 class="updating">Navigating to Hospital</h2>
+    </div>
+    <div class="callDirect" *ngIf="isLive">
+      <a class="makeCall" href="tel:+91{{ userData.contactPersonC1 }}"> <img src="../../../assets/call.webp" /> {{
+        userData.contactPerson1 }}</a>
+      <a class="makeCall" href="tel:+91{{ userData.contactPersonC2 }}"> <img src="../../../assets/call.webp" /> {{
+        userData.contactPerson2 }}</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="home" *ngIf="userType == 'ambulance'">
+  <div class="dashboard welcome">
+    <span>Hi,</span>
+    {{name}}
+  </div>
+  <div class="logout" (click)="doLogout()">Logout</div>
+  <div class="requests" *ngIf="!isLive">
+    <div *ngIf="errorMsg" class="errorMsg">
+      <img src="../../../assets/nolist.png" />
+      {{errorMsg}}
+    </div>
+    <div class="request" *ngFor="let item of requestDataList">
+      <div class="details">
+        <div class="distance">
+          <span>Distance</span>
+          {{item.distance.toFixed(2)}} KM
+          <br>
+          <span>Estimate Reach</span>
+          {{item.reachingIn.toFixed(2)}} Min
+        </div>
+        <!-- <div class="call">
+          <a href="tel:+91{{''}}"><img src="../../../assets/call.webp" /></a>
+        </div> -->
+        <div class="map">
+          <a target="_blank" href="https://maps.google.com?q={{item.lat}},{{item.long}}
+          "><img src="../../../assets/map.png" /></a>
+        </div>
+      </div>
+      <div class="button">
+        <button class="btn btn-primary btn-block" (click)="accpetRequest(item)">Accept Request</button>
+      </div>
+    </div>
+  </div>
+  <div class="liveDriver requestData" *ngIf="isLive">
+    <div>
+      <h2 class="updating" *ngIf="liveStatus == 2">Reaching Location</h2>
+      <h2 class="updating" *ngIf="liveStatus == 3">Reached Location</h2>
+      <h2 class="updating" *ngIf="liveStatus == 4">Reaching Hospital</h2>
+      <table>
+        <tr>
+          <th>User Name</th>
+          <th>{{ this.requestData?.userData?.name }}</th>
+        </tr>
+        <tr>
+          <th>User Contact</th>
+          <th>
+            <a href="tel:+91{{ this.requestData?.userData?.mobileno }}">
+              <img src="../../../assets/call.webp" class="driverCallImg" />
+              {{ this.requestData?.userData?.mobileno }}
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th>Location</th>
+          <th><a target="_blank" href="https://maps.google.com?q={{this.requestData?.lat}},{{this.requestData?.long}}
+            "><img class="driverCallImg" src="../../../assets/map.png" /> Location </a></th>
+        </tr>
+        <tr>
+          <th colspan="2">
+            <div *ngIf="liveStatus == 2" class="btn btn-block btn-primary" (click)="updateReuqest(3)">Reached Location
+            </div>
+            <div *ngIf="liveStatus == 3" class="btn btn-block btn-primary" (click)="updateReuqest(4)">Start
+            </div>
+            <div *ngIf="liveStatus == 4" class="btn btn-block btn-primary" (click)="updateReuqest(5)">Complete Request
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
+    <div class="callDirect callDirectD" *ngIf="isLive">
+      <a class="makeCall" href="tel:+91{{ this.requestData?.userData?.contactPersonC1 }}"> <img
+          src="../../../assets/call.webp" /> {{
+        this.requestData?.userData?.contactPerson1 }}</a>
+      <a class="makeCall" href="tel:+91{{ this.requestData?.userData?.contactPersonC2 }}"> <img
+          src="../../../assets/call.webp" /> {{
+        this.requestData?.userData?.contactPerson2 }}</a>
+    </div>
+  </div>
+</div>
